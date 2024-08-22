@@ -22,4 +22,4 @@ function InputStream(input) {
     }
 }
 
-console.log(InputStream('My baby is a fox. Foxy boy.').next());
+console.log(InputStream('The sun is shining.').next());
