@@ -10,10 +10,6 @@ function tokenize(input) {
     var pointer=0;
     var tokens=[];  
 
-    return {
-        get_next_token: get_next_token,
-    }
-
     function get_next_token() {
         if (pointer >= input.length) {
             return null;
@@ -25,7 +21,7 @@ function tokenize(input) {
                 tokens.push({ type, value: match[0] });
                 pointer += match[0].length;
                 matched = true;
-                break;
+                return { type, value: match[0] };
               }
         }
 
@@ -33,7 +29,15 @@ function tokenize(input) {
         console.log(tokens);
     }
 
+    while (pointer < input.length) {
+        get_next_token();
+    }
+
+    return tokens;
+
 }
+
+
 
 const fs = require('fs');
 const { get } = require('http');
@@ -60,7 +64,8 @@ function extractCodeFromFile(filePath) {
 }
 
 // Call the function to extract the code
-const code = extractCodeFromFile(filePath);
+const code1 = extractCodeFromFile(filePath);
 //console.log(code);//
+const code='1+2';
 tokenizer=tokenize(code);
-console.log(tokenizer.get_next_token());
+console.log(tokenizer);
